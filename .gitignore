@@ -1,0 +1,53 @@
+# Dependências
+/node_modules
+
+# Arquivos de configuração do ambiente
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Diretórios de build
+/dist
+/build
+/out
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Arquivos de runtime
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Diretórios e arquivos específicos do editor
+/.idea
+*.swp
+*.swo
+.vscode/
+*.sublime-workspace
+
+# Arquivos de cobertura de testes
+/coverage
+/.nyc_output
+
+# Arquivos de cache
+/.parcel-cache
+/.cache
+/.next
+/.nuxt
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Outros arquivos e diretórios
+*.tar.gz
+*.zip
+*.tgz
+*.tmp
+*.temp
