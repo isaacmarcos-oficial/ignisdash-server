@@ -1,4 +1,4 @@
-import { PostMongo } from "../mongodb/Models/Post";
+import { PostMongo } from "../src/mongodb/Models/Post";
 
 export async function migrateAddStatus() {
   const result = await PostMongo.updateMany(

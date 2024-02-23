@@ -1,16 +1,15 @@
 import "reflect-metadata";
 import path from "path";
 require("dotenv").config({ path: ".env.local" });
-import "./src/mongodb/connect";
+import "./mongodb/connect";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server";
-import { migrateAddStatus } from "./scripts/migrate-add-status.js";
 
-import { PostResolver } from "./src/Resolvers/PostResolver";
-import { CourseResolver } from "./src/Resolvers/CourseResolver";
-import { LessonResolver } from "./src/Resolvers/LessonResolver";
-import { ModuleResolver } from "./src/Resolvers/ModuleResolver";
-import { UserResolver } from "./src/Resolvers/UserResolver";
+import { PostResolver } from "./Resolvers/PostResolver";
+import { CourseResolver } from "./Resolvers/CourseResolver";
+import { LessonResolver } from "./Resolvers/LessonResolver";
+import { ModuleResolver } from "./Resolvers/ModuleResolver";
+import { UserResolver } from "./Resolvers/UserResolver";
 
 async function main() {
   const schema = await buildSchema({
@@ -20,10 +19,13 @@ async function main() {
 
   const server = new ApolloServer({
     schema,
-  });
+    introspection: true,
 
-  // Script para Migração
-  // await migrateAddStatus()
+    cors: {
+      origin: "*",
+      credentials: true
+    }
+  });
 
   const { url } = await server.listen();
   console.log("Server running on " + url);

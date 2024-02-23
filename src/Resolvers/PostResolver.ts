@@ -6,7 +6,20 @@ import { PostMongo } from "../mongodb/Models/Post";
 @Resolver()
 export class PostResolver {
   @Query(() => [Post])
-  async allPosts() {
+  async allPosts(
+    @Arg("name", { nullable: true }) name?: string,
+    @Arg("status", {nullable: true }) status?: string
+  ) {
+    const query: any = {};
+    
+    if (name) {
+      query.name = { ...query, name: new RegExp(name, "i")}
+    }
+
+    if (status) {
+      query.status = { ...query, status }
+    }
+
     return await PostMongo.find();
   }
 
@@ -19,11 +32,11 @@ export class PostResolver {
   async createPost(
     @Arg("createPostObject") createPostObject: CreatePostInput
   ) {
-    const { title, author, tags, coverImage, content, note, status } =
+    const { title, author, tags, coverImage, content, note, status, dateCreate } =
       createPostObject;
 
     return await PostMongo.create({
-      title, author, tags, coverImage, content, note, status
+      title, author, tags, coverImage, content, note, status, dateCreate
     });
   }
 

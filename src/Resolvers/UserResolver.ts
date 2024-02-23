@@ -15,15 +15,21 @@ export class UserResolver {
     return await UserMongo.findOne({ _id: id });
   }
 
+  @Query(() => [User], { nullable: true })
+  async usersByName(@Arg("name") name: string) {
+    return await UserMongo.find({ name: { $regex: name, $options: "i" } });
+  }
+
   @Mutation(() => User)
-  async createUser(
-    @Arg("createUserObject") createUserObject: CreateUserInput
-  ) {
-    const { name, username, email, accessLevel, password } =
-      createUserObject;
+  async createUser(@Arg("createUserObject") createUserObject: CreateUserInput) {
+    const { name, username, email, accessLevel, password } = createUserObject;
 
     return await UserMongo.create({
-      name, username, email, accessLevel, password
+      name,
+      username,
+      email,
+      accessLevel,
+      password,
     });
   }
 
