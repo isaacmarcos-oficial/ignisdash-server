@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 require("reflect-metadata");
 const path_1 = __importDefault(require("path"));
-require("dotenv").config({ path: ".env.local" });
+require("dotenv").config({ path: ".env" });
 require("./mongodb/connect");
 const type_graphql_1 = require("type-graphql");
 const apollo_server_1 = require("apollo-server");

@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import path from "path";
-require("dotenv").config({ path: ".env.local" });
+require("dotenv").config({ path: ".env" });
 import "./mongodb/connect";
 import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server";
@@ -14,7 +14,7 @@ import { UserResolver } from "./Resolvers/UserResolver";
 async function main() {
   const schema = await buildSchema({
     resolvers: [PostResolver, UserResolver, CourseResolver, ModuleResolver, LessonResolver],
-    emitSchemaFile: path.resolve(__dirname, "scheme.ggl"),
+    emitSchemaFile: path.resolve("/tmp", "scheme.ggl"),
   });
 
   const server = new ApolloServer({
