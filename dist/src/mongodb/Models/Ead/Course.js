@@ -29,4 +29,4 @@ const courseSchema = new mongoose_1.default.Schema({
 });
 exports.CourseMongo = mongoose_1.default.model("Course", courseSchema);
 exports.LessonMongo = mongoose_1.default.model("Lesson", lessonShema);
-exports.ModuleMongo = mongoose_1.default.model("Mudule", moduleShema);
+exports.ModuleMongo = mongoose_1.default.model("Module", moduleShema);

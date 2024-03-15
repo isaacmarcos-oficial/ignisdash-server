@@ -17,11 +17,14 @@ export class CreateLessonInput {
   @Field()
   videoUrl: string;
 
-  @Field()
+  @Field({nullable: true})
   moduleId: string;
 
   @Field()
   courseId: string
+
+  @Field()
+  teacherId: string
 }
 
 @InputType()
@@ -29,26 +32,29 @@ export class EditLessonInput {
   @Field((type) => ID)
   id: string;
 
-  @Field()
+  @Field({nullable: true})
   title: string;
   
-  @Field()
+  @Field({nullable: true})
   slug: string;
 
-  @Field()
+  @Field({nullable: true})
   description: string;
   
-  @Field()
+  @Field({nullable: true})
   coverImage: string;
 
-  @Field()
+  @Field({nullable: true})
   videoUrl: string;
 
-  @Field()
+  @Field({nullable: true})
   moduleId: string;
 
-  @Field()
+  @Field({nullable: true})
   courseId: string
+
+  @Field({nullable: true})
+  teacherId: string
 }
 
 @InputType()
@@ -58,6 +64,9 @@ export class CreateModuleInput {
 
   @Field({nullable: true})
   description: string;
+
+  @Field({nullable: true})
+  courseId: string;
 }
 
 @InputType()
@@ -70,4 +79,7 @@ export class EditModuleInput {
 
   @Field({nullable: true})
   description: string;
+
+  @Field({nullable: true})
+  courseId: string;
 }

@@ -1,9 +1,10 @@
-import { Arg, Query, Mutation, Resolver } from "type-graphql";
-import { LessonMongo } from "../mongodb/Models/Ead/Course";
+import { Arg, Query, Mutation, Resolver, FieldResolver, Root } from "type-graphql";
+import { LessonMongo, ModuleMongo, TeacherMongo } from "../mongodb/Models/Ead/Course";
 import { CreateLessonInput, EditLessonInput } from "../Inputs/EadInputs/LessonInput";
-import { Lesson } from "../Models/Ead/Lesson";
+import { Lesson, Module } from "../Models/Ead/Lesson";
+import { Teacher } from "../Models/Ead/Teacher";
 
-@Resolver()
+@Resolver(of => Lesson)
 export class LessonResolver {
   @Query(() => [Lesson])
   async allLessons() {
@@ -15,15 +16,28 @@ export class LessonResolver {
     return await LessonMongo.findOne({ _id: id });
   }
 
+  @FieldResolver(() => Teacher)
+  async teacher(@Root() lesson: Lesson) {
+    if(!lesson.teacherId) {
+      return null
+    }
+    return await TeacherMongo.findOne({ _id: lesson.teacherId });
+  }
+
+  @FieldResolver(() => Module)
+  async module(@Root() lesson: Lesson) {
+    return await ModuleMongo.findOne({ _id: lesson.moduleId });
+  }
+
   @Mutation(() => Lesson)
   async createLesson(
     @Arg("createLessonObject") createLessonObject: CreateLessonInput
   ) {
-    const { title, description, slug, coverImage, videoUrl, courseId, moduleId } =
+    const { title, description, slug, coverImage, videoUrl, courseId, moduleId, teacherId } =
       createLessonObject;
 
     return await LessonMongo.create({
-      title, description, slug, coverImage, videoUrl, courseId, moduleId
+      title, description, slug, coverImage, videoUrl, courseId, moduleId, teacherId
     });
   }
 

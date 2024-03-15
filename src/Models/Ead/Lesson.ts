@@ -20,11 +20,14 @@ export class Lesson {
   @Field()
   videoUrl: string;
 
-  @Field()
+  @Field({nullable: true})
   moduleId: string;
 
   @Field()
   courseId: string
+
+  @Field()
+  teacherId: string
 }
 
 @ObjectType()
@@ -37,5 +40,8 @@ export class Module {
 
   @Field({nullable: true})
   description: string;
+
+  @Field({nullable: true})
+  courseId: string;
 }
 

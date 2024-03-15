@@ -18,7 +18,8 @@ export class CourseResolver {
 
   @FieldResolver(() => [Module])
   async modules(@Root() course: Course) {
-    return await ModuleMongo.find({ courseId: course.id })
+    const modules = await ModuleMongo.find({ courseId: course.id })
+    return modules
   }
 
   @FieldResolver(() => [Lesson])

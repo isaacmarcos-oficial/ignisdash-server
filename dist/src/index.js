@@ -17,7 +17,7 @@ const UserResolver_1 = require("./Resolvers/UserResolver");
 async function main() {
     const schema = await (0, type_graphql_1.buildSchema)({
         resolvers: [PostResolver_1.PostResolver, UserResolver_1.UserResolver, CourseResolver_1.CourseResolver, ModuleResolver_1.ModuleResolver, LessonResolver_1.LessonResolver],
-        emitSchemaFile: path_1.default.resolve(__dirname, "scheme.ggl"),
+        emitSchemaFile: path_1.default.resolve("/tmp", "scheme.ggl"),
     });
     const server = new apollo_server_1.ApolloServer({
         schema,

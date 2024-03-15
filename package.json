@@ -18,6 +18,7 @@
     "graphql": "^15.3.0",
     "mongoose": "^6.5.2",
     "reflect-metadata": "^0.2.1",
+    "socket.io": "^4.7.5",
     "type-graphql": "^1.1.1",
     "vercel": "^33.2.0"
   },

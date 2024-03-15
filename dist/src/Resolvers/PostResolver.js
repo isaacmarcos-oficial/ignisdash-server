@@ -18,10 +18,10 @@ const PostInput_1 = require("../Inputs/PostInput");
 const Post_1 = require("../Models/Post");
 const Post_2 = require("../mongodb/Models/Post");
 let PostResolver = class PostResolver {
-    async allPosts(name, status) {
+    async allPosts(title, status) {
         const query = {};
-        if (name) {
-            query.name = { ...query, name: new RegExp(name, "i") };
+        if (title) {
+            query.title = { ...query, title: new RegExp(title, "i") };
         }
         if (status) {
             query.status = { ...query, status };
@@ -50,7 +50,7 @@ let PostResolver = class PostResolver {
 exports.PostResolver = PostResolver;
 __decorate([
     (0, type_graphql_1.Query)(() => [Post_1.Post]),
-    __param(0, (0, type_graphql_1.Arg)("name", { nullable: true })),
+    __param(0, (0, type_graphql_1.Arg)("title", { nullable: true })),
     __param(1, (0, type_graphql_1.Arg)("status", { nullable: true })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String]),

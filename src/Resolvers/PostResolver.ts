@@ -6,21 +6,26 @@ import { PostMongo } from "../mongodb/Models/Post";
 @Resolver()
 export class PostResolver {
   @Query(() => [Post])
-  async allPosts(
-    @Arg("name", { nullable: true }) name?: string,
-    @Arg("status", {nullable: true }) status?: string
+  async allPosts() {
+    return await PostMongo.find();
+  }
+  
+  @Query(() => [Post])
+  async postsFiltered(
+    @Arg("title", { nullable: true }) title: string,
+    @Arg("status", { nullable: true }) status: string
   ) {
     const query: any = {};
-    
-    if (name) {
-      query.name = { ...query, name: new RegExp(name, "i")}
+
+    if (title) {
+      query.title = new RegExp(title, "i");
     }
 
     if (status) {
-      query.status = { ...query, status }
+      query.status = (status);
     }
 
-    return await PostMongo.find();
+    return await PostMongo.find(query);
   }
 
   @Query(() => Post)
